@@ -41,7 +41,7 @@ This project was developed as part of the **"Python and Cursor: Smarter developm
 
 1. **Clone or download the project**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Jonas-Portes/Personal-Task-Manager
    cd Personal-Task-Manager
    ```
 
