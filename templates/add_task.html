@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Add Task - Task Manager{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h2 class="mb-0"><i class="fas fa-plus me-2"></i>Add New Task</h2>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_task') }}">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Task Title *</label>
+                        <input type="text" class="form-control" id="title" name="title" required 
+                               placeholder="Enter task title" autofocus>
+                        <div class="form-text">A brief, descriptive title for your task.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" 
+                                  rows="4" placeholder="Enter task description (optional)"></textarea>
+                        <div class="form-text">Provide additional details about the task.</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="taskEndUntil" class="form-label">Deadline (Optional)</label>
+                        <input type="date" class="form-control" id="taskEndUntil" name="end_until">
+                        <div class="form-text">Set a deadline for this task. Leave empty for no deadline.</div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between">
+                        <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Back to Tasks
+                        </a>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save me-2"></i>Add Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Quick Tips -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h5 class="mb-0"><i class="fas fa-lightbulb me-2"></i>Quick Tips</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Use clear, actionable titles</li>
+                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>Add descriptions for complex tasks</li>
+                    <li class="mb-2"><i class="fas fa-check text-success me-2"></i>You can edit tasks later</li>
+                    <li class="mb-0"><i class="fas fa-check text-success me-2"></i>Mark tasks as complete when done</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-resize textarea
+document.getElementById('description').addEventListener('input', function() {
+    this.style.height = 'auto';
+    this.style.height = (this.scrollHeight) + 'px';
+});
+
+// Form validation
+document.querySelector('form').addEventListener('submit', function(e) {
+    const title = document.getElementById('title').value.trim();
+    if (!title) {
+        e.preventDefault();
+        alert('Please enter a task title.');
+        document.getElementById('title').focus();
+    }
+});
+</script>
+{% endblock %}
